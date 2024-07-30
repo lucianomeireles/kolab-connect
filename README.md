@@ -29,7 +29,6 @@ Node.js (>= 14.x) pnpm (>= 6.x)
 Clone the repository:
 
 ```
-
 git clone https://github.com/lucianomeireles/kolab-connect.git
 cd kolab-connect
 ```
@@ -106,8 +105,12 @@ README.md
 ```
 
 ## Technologies Used
+- [Next.js](https://nextjs.org/)
+- [Chakra UI](https://chakra-ui.com/)
+- [i18next](https://www.i18next.com/)
+- [React Query](https://react-query.tanstack.com/)
+- [TypeScript](https://www.typescriptlang.org/)
 
-Next.js Chakra UI i18next React Query TypeScript
 
 ## Contributing
 
