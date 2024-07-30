@@ -1,0 +1,7 @@
+{
+  "/users/[userId]/page": "app/users/[userId]/page.js",
+  "/(app)/(dashboard)/page": "app/(app)/(dashboard)/page.js",
+  "/users/search/page": "app/users/search/page.js",
+  "/login/page": "app/login/page.js",
+  "/favicon.ico/route": "app/favicon.ico/route.js"
+}
