@@ -33,7 +33,7 @@ export default function PostCard({ post }: PostCardProps) {
                 {post.user?.name}
               </Text>
             </Link>
-            <Text fontSize="xs" lineHeight="12px">
+            <Text fontSize="xs" lineHeight="12px" color="gray.600">
               {post.user?.address?.city}
             </Text>
           </VStack>

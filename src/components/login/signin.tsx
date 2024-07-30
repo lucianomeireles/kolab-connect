@@ -12,10 +12,12 @@ import {
   Input
 } from '@chakra-ui/react';
 import { Field, Form, Formik } from 'formik';
+import { useRouter } from 'next/router';
 import { useContext } from 'react';
 import { useTranslation } from 'react-i18next';
 
 export function Signin() {
+  const router = useRouter();
   const { t } = useTranslation();
   const initialValues: LoginForm = { email: '' };
   const { setStep, setEmail } = useContext(LoginContext);
@@ -25,6 +27,9 @@ export function Signin() {
     if (result === undefined) {
       setEmail(values.email);
       setStep('register');
+    } else {
+      localStorage.setItem('loggedUser', JSON.stringify(result));
+      router.push('/');
     }
     actions.setSubmitting(false);
   };

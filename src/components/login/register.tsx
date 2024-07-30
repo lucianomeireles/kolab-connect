@@ -31,7 +31,6 @@ export function Register() {
   const { mutateAsync: registerUser } = useRegisterUser();
 
   const handleOnSubmit = async (values: RegisterForm, actions: any) => {
-    actions.setSubmitting(true);
     const result = await registerUser({ ...values, email: email || '' });
     if (result !== undefined) {
       router.push('/');
