@@ -2,18 +2,23 @@ import type { LoginForm, RegisterForm, User } from '@/models';
 import { useMutation, useQuery } from '@tanstack/react-query';
 import { apiClient } from '../apiClient';
 
+// Get the logged user from localStorage
 export const getLoggedUser = (): User => {
-  if (typeof window !== 'undefined' && localStorage.getItem('loggedUser')) {
-    return JSON.parse(localStorage.getItem('loggedUser') || '{}');
+  if (typeof window !== 'undefined') {
+    const loggedUser = localStorage.getItem('loggedUser');
+    if (loggedUser) {
+      return JSON.parse(loggedUser);
+    }
   }
   return {} as User;
 };
 
+// Fetch users from the API and include the logged user
 const getUsers = async (): Promise<User[]> => {
-  const { data } = await apiClient.get<User>(`/users/`);
+  const { data } = await apiClient.get<User[]>('/users');
   if (!data) return [];
-  let apiUsers = data as unknown as User[];
-  apiUsers = apiUsers.map(user => ({
+
+  const apiUsers = data.map(user => ({
     ...user,
     username: user.username.toLowerCase()
   }));
@@ -23,27 +28,28 @@ const getUsers = async (): Promise<User[]> => {
   return result.sort((a, b) => a.name.localeCompare(b.name));
 };
 
+// React Query hook for fetching users
 export const useGetUsers = () => {
   return useQuery<User[], Error>({
     queryKey: ['users'],
-    queryFn: () => getUsers()
+    queryFn: getUsers
   });
 };
 
+// Validate user by email
 export const validateUser = async (
   params: LoginForm
 ): Promise<User | undefined> => {
   const { data } = await apiClient.get<User[]>(`/users?email=${params.email}`);
-
-  if (data.length === 0) return undefined;
-  else return data[0];
+  return data.length > 0 ? data[0] : undefined;
 };
 
+// Register a new user and save to localStorage
 const registerUser = async (params: RegisterForm): Promise<User> => {
-  const userParams = {
-    id: 11,
+  const userParams: User = {
+    id: Math.floor(Math.random() * 99999999) + 1000, // Generate a random ID
     name: params.name,
-    username: params.username,
+    username: params.username.toLowerCase(),
     email: params.email,
     address: {
       street: 'R. Tito, 479',
@@ -59,7 +65,8 @@ const registerUser = async (params: RegisterForm): Promise<User> => {
     website: 'https://kolab.com.br/',
     company: {
       name: 'Kolab',
-      catchPhrase: `Recruitment & Selection, onboarding and training more interactive and connected to your company's culture.`,
+      catchPhrase:
+        "Recruitment & Selection, onboarding and training more interactive and connected to your company's culture.",
       bs: 'hr'
     }
   };
@@ -68,9 +75,10 @@ const registerUser = async (params: RegisterForm): Promise<User> => {
   return userParams;
 };
 
+// React Query hook for registering a user
 export const useRegisterUser = () => {
   return useMutation<User, Error, RegisterForm>({
     mutationKey: ['registerUser'],
-    mutationFn: params => registerUser(params)
+    mutationFn: registerUser
   });
 };

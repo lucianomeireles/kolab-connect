@@ -1,9 +1,8 @@
 import { PostCardContext } from '@/context';
-import i18n from '@/i18n';
 import { getLoggedUser, removeLocalPost } from '@/services';
 import { Button, ButtonGroup, Flex } from '@chakra-ui/react';
 import { useQueryClient } from '@tanstack/react-query';
-import { useContext, useMemo, useState } from 'react';
+import { useContext, useMemo } from 'react';
 import { useTranslation } from 'react-i18next';
 
 type PostCardActionsProps = {
@@ -31,13 +30,7 @@ export function PostCardActions({ postId, userId }: PostCardActionsProps) {
     } else {
       return t('see_comments');
     }
-  }, [
-    t,
-    i18n.language,
-    isCommentsOpened,
-    setIsCommentsOpened,
-    postCommentsLength
-  ]);
+  }, [t, isCommentsOpened, postCommentsLength]);
 
   const handleOnDelete = () => {
     removeLocalPost(postId);
@@ -51,9 +44,7 @@ export function PostCardActions({ postId, userId }: PostCardActionsProps) {
       <Button
         fontSize="xs"
         variant="link"
-        onClick={() => {
-          setIsCommentsOpened(!isCommentsOpened);
-        }}
+        onClick={() => setIsCommentsOpened(!isCommentsOpened)}
       >
         {commentsDisplay}
       </Button>
@@ -63,7 +54,7 @@ export function PostCardActions({ postId, userId }: PostCardActionsProps) {
             <Button
               fontSize="xs"
               variant="link"
-              onClick={_ => setIsEditing(true)}
+              onClick={() => setIsEditing(true)}
             >
               {t('edit')}
             </Button>

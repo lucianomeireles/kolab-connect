@@ -13,8 +13,7 @@ const getPosts = async (userId?: string): Promise<Post[]> => {
     ? localPosts.filter((post: Post) => post.userId.toString() === userId)
     : localPosts;
 
-  const apiPosts = data ? data : [];
-  return [...apiPosts, ...localPostsFiltered];
+  return [...(data || []), ...localPostsFiltered];
 };
 
 export const useGetPosts = (userId?: string) => {
@@ -37,24 +36,21 @@ export const saveLocalPost = (params: Partial<Post>): void => {
     comments: []
   };
 
-  const storedPosts = localStorage.getItem('posts');
-  const localPosts: Post[] = storedPosts ? JSON.parse(storedPosts) : [];
-
+  const storedPosts = JSON.parse(localStorage.getItem('posts') || '[]');
   if (!params.id) {
-    localPosts.push(postParams);
-    localStorage.setItem('posts', JSON.stringify(localPosts));
+    storedPosts.push(postParams);
   } else {
-    const newComments = localPosts.map((post: Post) =>
-      post.id === params.id ? postParams : post
-    );
-    localStorage.setItem('posts', JSON.stringify(newComments));
+    const index = storedPosts.findIndex((post: Post) => post.id === params.id);
+    if (index !== -1) {
+      storedPosts[index] = postParams;
+    }
   }
+  localStorage.setItem('posts', JSON.stringify(storedPosts));
 };
 
 export const removeLocalPost = (postId: number): void => {
-  const storedPosts = localStorage.getItem('posts');
-  const posts: Post[] = storedPosts ? JSON.parse(storedPosts) : [];
-  const newPosts = posts.filter((post: Post) => post.id !== postId);
+  const storedPosts = JSON.parse(localStorage.getItem('posts') || '[]');
+  const newPosts = storedPosts.filter((post: Post) => post.id !== postId);
   localStorage.setItem('posts', JSON.stringify(newPosts));
 };
 
@@ -65,8 +61,7 @@ const getPostComments = async (postId: number): Promise<PostComment[]> => {
     `/posts/${postId}/comments`
   );
   const localPostComments = getLocalPostComments(postId);
-  const apiData = data ? data : [];
-  return [...apiData, ...localPostComments];
+  return [...(data || []), ...localPostComments];
 };
 
 export const getLocalPostComments = (postId: number): PostComment[] => {
@@ -103,28 +98,27 @@ export const saveLocalPostComment = async (
     user: params.user
   };
 
-  const storedComments = localStorage.getItem('postComments');
-  const localPostComments: PostComment[] = storedComments
-    ? JSON.parse(storedComments)
-    : [];
-
+  const storedComments = JSON.parse(
+    localStorage.getItem('postComments') || '[]'
+  );
   if (!params.id) {
-    localPostComments.push(commentParams);
-    localStorage.setItem('postComments', JSON.stringify(localPostComments));
+    storedComments.push(commentParams);
   } else {
-    const newComments = localPostComments.map((comment: PostComment) =>
-      comment.id === params.id ? commentParams : comment
+    const index = storedComments.findIndex(
+      (comment: PostComment) => comment.id === params.id
     );
-    localStorage.setItem('postComments', JSON.stringify(newComments));
+    if (index !== -1) {
+      storedComments[index] = commentParams;
+    }
   }
+  localStorage.setItem('postComments', JSON.stringify(storedComments));
 };
 
 export const removePostComment = async (commentId: number): Promise<void> => {
-  const storedComments = localStorage.getItem('postComments');
-  const comments: PostComment[] = storedComments
-    ? JSON.parse(storedComments)
-    : [];
-  const newComments = comments.filter(
+  const storedComments = JSON.parse(
+    localStorage.getItem('postComments') || '[]'
+  );
+  const newComments = storedComments.filter(
     (comment: PostComment) => comment.id !== commentId
   );
   localStorage.setItem('postComments', JSON.stringify(newComments));

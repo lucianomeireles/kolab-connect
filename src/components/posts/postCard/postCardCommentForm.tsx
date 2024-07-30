@@ -10,6 +10,7 @@ import {
 } from '@chakra-ui/react';
 import { useQueryClient } from '@tanstack/react-query';
 import { useState } from 'react';
+import { useTranslation } from 'react-i18next';
 import { MdAddComment, MdInsertComment } from 'react-icons/md';
 
 type PostCardCommentFormProps = {
@@ -25,6 +26,7 @@ export function PostCardCommentForm({
   initialComment,
   onSaved
 }: PostCardCommentFormProps) {
+  const { t } = useTranslation();
   const queryClient = useQueryClient();
   const [userComment, setUserComment] = useState<string>(initialComment || '');
   const loggedUser = getLoggedUser();
@@ -53,7 +55,7 @@ export function PostCardCommentForm({
       <InputGroup>
         <Input
           borderRadius="md"
-          placeholder="Add a comment..."
+          placeholder={t('add_a_comment')}
           size="md"
           value={userComment}
           onChange={e => setUserComment(e.target.value)}
@@ -63,7 +65,7 @@ export function PostCardCommentForm({
           <IconButton
             onClick={saveComment}
             variant="text"
-            aria-label="Save"
+            aria-label={t('save')}
             size="lg"
             icon={!commentId ? <MdAddComment /> : <MdInsertComment />}
           />

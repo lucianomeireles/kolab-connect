@@ -2,7 +2,6 @@ import { LoginContext } from '@/context';
 import { LoginForm } from '@/models';
 import { loginFormSchema } from '@/schemas';
 import { validateUser } from '@/services';
-
 import {
   Box,
   Button,
@@ -27,33 +26,32 @@ export function Signin() {
       setEmail(values.email);
       setStep('register');
     }
+    actions.setSubmitting(false);
   };
 
   return (
     <Flex
-      style={{ minHeight: '100vh', minWidth: '100vw' }}
-      justifyContent="center"
-      alignItems="center"
+      minH="100vh"
+      minW="100vw"
+      justify="center"
+      align="center"
       direction="column"
       gap={8}
+      overflow="hidden"
     >
       {/* eslint-disable-next-line @next/next/no-img-element */}
       <img src="/logo.svg" height={35} alt="logo" />
-      <Box
-        style={{
-          minWidth: '340px'
-        }}
-      >
+      <Box w={{ base: '90%', md: '340px' }}>
         <Formik
           initialValues={initialValues}
           validationSchema={loginFormSchema}
           onSubmit={handleOnSubmit}
           validateOnChange
         >
-          {actions => (
+          {({ isSubmitting }) => (
             <Form>
               <Flex
-                backgroundColor="white"
+                bg="white"
                 border="0.5px"
                 borderColor="gray.100"
                 borderRadius="xl"
@@ -64,15 +62,17 @@ export function Signin() {
               >
                 <Field name="email">
                   {({ field, form }: any) => (
-                    <FormControl isInvalid={form.errors.email}>
-                      <FormLabel htmlFor="email">Email</FormLabel>
-                      <Input {...field} placeholder="Enter your email" />
+                    <FormControl
+                      isInvalid={form.errors.email && form.touched.email}
+                    >
+                      <FormLabel htmlFor="email">{t('email')}</FormLabel>
+                      <Input {...field} placeholder={t('enter_your_email')} />
                       <FormErrorMessage>{form.errors.email}</FormErrorMessage>
                     </FormControl>
                   )}
                 </Field>
                 <Button
-                  isLoading={actions.isSubmitting}
+                  isLoading={isSubmitting}
                   type="submit"
                   variant="solid"
                   w="full"

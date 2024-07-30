@@ -1,13 +1,13 @@
 'use client';
 
-import { PostComment, User } from '@/models';
+import { PostComment } from '@/models';
 import { getLoggedUser, removePostComment } from '@/services';
 import { Avatar, Box, Button, HStack, Text } from '@chakra-ui/react';
 import { useQueryClient } from '@tanstack/react-query';
+import Link from 'next/link';
 import { useState } from 'react';
 import { MdDelete, MdEdit } from 'react-icons/md';
 import { PostCardCommentForm } from './postCardCommentForm';
-import Link from 'next/link';
 
 type PostCardCommentsItemProps = {
   comment: PostComment;

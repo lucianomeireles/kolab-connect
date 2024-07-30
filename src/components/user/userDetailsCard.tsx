@@ -33,8 +33,8 @@ export default function UserDetailsCard({ userId }: UserDetailsCardProps) {
 
   const editable = userId === loggedUser?.id.toString();
 
-  const handleUpdateUser = (user: User) => {
-    localStorage.setItem('loggedUser', JSON.stringify(user));
+  const handleUpdateUser = (updatedUser: User) => {
+    localStorage.setItem('loggedUser', JSON.stringify(updatedUser));
   };
 
   function EditableControls() {

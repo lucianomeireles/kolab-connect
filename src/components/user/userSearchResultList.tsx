@@ -8,7 +8,8 @@ import {
   Text,
   VStack
 } from '@chakra-ui/react';
-import React, { Fragment, useContext } from 'react';
+import { Fragment, useContext } from 'react';
+import { useTranslation } from 'react-i18next';
 import { UserAvatar } from './userAvatar';
 
 type UserSearchResultListProps = {
@@ -16,7 +17,7 @@ type UserSearchResultListProps = {
 };
 
 export function UserSearchResultList({ filter }: UserSearchResultListProps) {
-  //get users form app context and filter with params
+  const { t } = useTranslation();
   const { users } = useContext(AppContext);
 
   const filteredUsers = filter
@@ -25,11 +26,11 @@ export function UserSearchResultList({ filter }: UserSearchResultListProps) {
       )
     : [];
 
-  if (!filter) return <></>;
+  if (!filter) return null;
   if (!!filter && filteredUsers.length === 0) {
     return (
       <Flex justifyContent="center" alignItems="center" flexGrow={1}>
-        <Text>No users found</Text>
+        <Text>{t('no_users_found')}</Text>
       </Flex>
     );
   }
@@ -47,31 +48,24 @@ export function UserSearchResultList({ filter }: UserSearchResultListProps) {
         p={4}
         py={5}
       >
-        {filteredUsers?.map((user, index) => {
-          return (
-            <Fragment key={user.id}>
-              {index > 0 && <Divider key={index} color="gray.200" />}
-              <HStack gap={3} align="center">
+        {filteredUsers.map((user, index) => (
+          <Fragment key={user.id}>
+            {index > 0 && <Divider color="gray.200" />}
+            <HStack gap={3} align="center">
+              <UserAvatar name={user.name || ''} userId={user.id} />
+              <VStack gap={0} align="flex-start">
                 <Link href={`/users/${user.id}`}>
-                  <UserAvatar
-                    name={user.name || ''}
-                    username={user.username || ''}
-                  />
-                </Link>
-                <VStack gap={0} align="flex-start">
-                  <Link href={`/users/${user.id}`}>
-                    <Text as="b" fontSize="sm">
-                      {user.name}
-                    </Text>
-                  </Link>
-                  <Text fontSize="xs" lineHeight="12px">
-                    {user.address?.city}
+                  <Text as="b" fontSize="sm">
+                    {user.name}
                   </Text>
-                </VStack>
-              </HStack>
-            </Fragment>
-          );
-        })}
+                </Link>
+                <Text fontSize="xs" lineHeight="12px">
+                  {user.address?.city}
+                </Text>
+              </VStack>
+            </HStack>
+          </Fragment>
+        ))}
       </Flex>
     </Box>
   );

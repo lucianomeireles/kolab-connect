@@ -31,7 +31,7 @@ export default function PostCardComments({ postId }: PostCardCommentsProps) {
 
   useEffect(() => {
     setPostComments(postComments);
-  }, [commentsMapped]);
+  }, [postComments, setPostComments]);
 
   const handleOnSaved = () => {
     setIsCommentsOpened(true);
@@ -39,7 +39,7 @@ export default function PostCardComments({ postId }: PostCardCommentsProps) {
 
   return (
     <>
-      {((isCommentsOpened && commentsMapped?.length) || 0) > 0 && (
+      {isCommentsOpened && (commentsMapped?.length || 0) > 0 && (
         <Box
           w="full"
           maxH="300px"

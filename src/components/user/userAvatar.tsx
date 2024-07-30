@@ -1,10 +1,14 @@
-import { Avatar } from '@chakra-ui/react';
+import { Avatar, Link } from '@chakra-ui/react';
 
 type UserAvatarProps = {
   name: string;
-  username: string;
+  userId: number;
 };
 
-export function UserAvatar({ name }: UserAvatarProps) {
-  return <Avatar size="sm" name={name} />;
+export function UserAvatar({ name, userId }: UserAvatarProps) {
+  return (
+    <Link href={`/users/${userId}`}>
+      <Avatar size="sm" name={name} />
+    </Link>
+  );
 }

@@ -10,6 +10,7 @@ import {
 } from '@chakra-ui/react';
 import { useQueryClient } from '@tanstack/react-query';
 import { useContext, useState } from 'react';
+import { useTranslation } from 'react-i18next';
 import { MdSave } from 'react-icons/md';
 
 type PostCardDescriptionProps = {
@@ -19,6 +20,7 @@ type PostCardDescriptionProps = {
 export default function PostCardDescription({
   post
 }: PostCardDescriptionProps) {
+  const { t } = useTranslation();
   const queryClient = useQueryClient();
   const [postDescription, setPostDescription] = useState<string>(post.body);
   const { isEditing, setIsEditing } = useContext(PostCardContext);
@@ -52,7 +54,7 @@ export default function PostCardDescription({
           <InputRightElement>
             <IconButton
               variant="text"
-              aria-label="Search"
+              aria-label={t('save')}
               size="lg"
               icon={<MdSave />}
               onClick={handleOnSave}

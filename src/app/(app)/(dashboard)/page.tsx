@@ -1,8 +1,8 @@
 'use client';
 
 import { Feed, Header, NewPost } from '@/components';
-import { Box, VStack } from '@chakra-ui/react';
 import { AppProvider } from '@/context';
+import { Box, VStack } from '@chakra-ui/react';
 
 export default function Home() {
   return (

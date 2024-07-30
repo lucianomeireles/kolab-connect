@@ -7,6 +7,7 @@ import {
 } from '@chakra-ui/react';
 import { useRouter } from 'next/navigation';
 import { useState } from 'react';
+import { useTranslation } from 'react-i18next';
 import { MdSearch } from 'react-icons/md';
 
 type UserFilterFormProps = {
@@ -14,6 +15,7 @@ type UserFilterFormProps = {
 };
 
 export function UserFilterForm({ backgroundColor }: UserFilterFormProps) {
+  const { t } = useTranslation();
   const router = useRouter();
   const [userComment, setUserComment] = useState('');
 
@@ -27,7 +29,7 @@ export function UserFilterForm({ backgroundColor }: UserFilterFormProps) {
       <InputGroup size="md">
         <Input
           backgroundColor={backgroundColor}
-          placeholder="Find user by name"
+          placeholder={t('find_user_by_name')}
           flexGrow={1}
           borderRadius={6}
           onChange={e => setUserComment(e.target.value)}
@@ -39,7 +41,7 @@ export function UserFilterForm({ backgroundColor }: UserFilterFormProps) {
           <IconButton
             onClick={handleOnSearch}
             variant="text"
-            aria-label="Search"
+            aria-label={t('search')}
             size="lg"
             icon={<MdSearch />}
           />

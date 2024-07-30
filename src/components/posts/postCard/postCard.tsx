@@ -26,10 +26,7 @@ export default function PostCard({ post }: PostCardProps) {
         direction="column"
       >
         <HStack gap={3} align="center">
-          <UserAvatar
-            name={post.user?.name || ''}
-            username={post.user?.username || ''}
-          />
+          <UserAvatar name={post.user?.name || ''} userId={post.userId} />
           <VStack gap={0} align="flex-start" flexGrow={1}>
             <Link href={`/users/${post.user?.id}`}>
               <Text as="b" fontSize="sm">

@@ -2,7 +2,6 @@ import { LoginContext } from '@/context';
 import { RegisterForm } from '@/models';
 import { registerFormSchema } from '@/schemas';
 import { useRegisterUser } from '@/services';
-
 import {
   Box,
   Button,
@@ -22,6 +21,7 @@ export function Register() {
   const router = useRouter();
   const { t } = useTranslation();
   const { email, setStep } = useContext(LoginContext);
+
   const initialValues: RegisterForm = {
     email: email || '',
     name: '',
@@ -41,29 +41,27 @@ export function Register() {
 
   return (
     <Flex
-      style={{ minHeight: '100vh', minWidth: '100vw' }}
-      justifyContent="center"
-      alignItems="center"
+      minH="100vh"
+      minW="100vw"
+      justify="center"
+      align="center"
       direction="column"
       gap={8}
+      overflow="hidden"
     >
       {/* eslint-disable-next-line @next/next/no-img-element */}
-      <img src="/logo.svg" height={35} alt="logo" />
-      <Box
-        style={{
-          minWidth: '340px'
-        }}
-      >
+      <img src="/logo.svg" height={35} alt="Kolab Connect" />
+      <Box w={{ base: '90%', md: '340px' }}>
         <Formik
           initialValues={initialValues}
           validationSchema={registerFormSchema}
           onSubmit={handleOnSubmit}
           validateOnChange
         >
-          {actions => (
+          {({ isSubmitting }) => (
             <Form>
               <Flex
-                backgroundColor="white"
+                bg="white"
                 border="0.5px"
                 borderColor="gray.100"
                 borderRadius="xl"
@@ -75,9 +73,11 @@ export function Register() {
                 <VStack gap={4}>
                   <Field name="name">
                     {({ field, form }: any) => (
-                      <FormControl isInvalid={form.errors.name}>
+                      <FormControl
+                        isInvalid={form.errors.name && form.touched.name}
+                      >
                         <FormLabel htmlFor="name" fontSize="sm">
-                          Name
+                          {t('name')}
                         </FormLabel>
                         <Input fontSize="sm" {...field} size="sm" />
                         <FormErrorMessage>{form.errors.name}</FormErrorMessage>
@@ -86,9 +86,13 @@ export function Register() {
                   </Field>
                   <Field name="username">
                     {({ field, form }: any) => (
-                      <FormControl isInvalid={form.errors.username}>
+                      <FormControl
+                        isInvalid={
+                          form.errors.username && form.touched.username
+                        }
+                      >
                         <FormLabel htmlFor="username" fontSize="sm">
-                          User Name
+                          {t('username')}
                         </FormLabel>
                         <Input fontSize="sm" {...field} size="sm" />
                         <FormErrorMessage>
@@ -99,7 +103,7 @@ export function Register() {
                   </Field>
                 </VStack>
                 <Button
-                  isLoading={actions.isSubmitting}
+                  isLoading={isSubmitting}
                   type="submit"
                   variant="solid"
                   w="full"
@@ -112,13 +116,7 @@ export function Register() {
           )}
         </Formik>
       </Box>
-      <Button
-        variant="text"
-        w="full"
-        onClick={_ => {
-          setStep('signin');
-        }}
-      >
+      <Button variant="text" w="full" onClick={() => setStep('signin')}>
         {t('back')}
       </Button>
     </Flex>

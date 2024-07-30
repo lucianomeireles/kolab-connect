@@ -13,14 +13,14 @@ export const customChakraTheme = extendTheme({
       800: '#B38500'
     },
     kbLightYellow: {
-      100: '#FFFCF2',
-      200: '#FFFCF2',
-      300: '#FFFCF2',
-      400: '#FFFCF2',
+      100: '#FFFDF8',
+      200: '#FFFCEA',
+      300: '#FFFADD',
+      400: '#FFF8CF',
       500: '#FFFCF2',
-      600: '#FFFCF2',
-      700: '#FFFCF2',
-      800: '#FFFCF2'
+      600: '#FFF3B4',
+      700: '#FFF1A7',
+      800: '#FFE998'
     }
   }
 });

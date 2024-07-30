@@ -1,64 +1,31 @@
 'use client';
 
+import { getLoggedUser } from '@/services';
 import {
+  Avatar,
   Box,
   Flex,
   HStack,
   IconButton,
+  Image,
   Menu,
   MenuButton,
   MenuItem,
   MenuList,
-  Image,
-  Avatar,
   Text
 } from '@chakra-ui/react';
-import { useMemo } from 'react';
-import { useTranslation } from 'react-i18next';
 import Link from 'next/link';
-import { UserFilterForm } from '../user/userFilterForm';
-import { getLoggedUser } from '@/services';
-import { MdSearch } from 'react-icons/md';
 import { useRouter } from 'next/navigation';
-
-const languages = [
-  {
-    code: 'en',
-    name: 'English',
-    flag: '🇺🇸'
-  },
-  {
-    code: 'zh',
-    name: 'Chinese',
-    flag: '🇨🇳'
-  },
-  {
-    code: 'es',
-    name: 'Spanish',
-    flag: '🇪🇸'
-  },
-  {
-    code: 'pt',
-    name: 'Portuguese',
-    flag: '🇧🇷'
-  }
-];
+import { useTranslation } from 'react-i18next';
+import { MdSearch } from 'react-icons/md';
+import { UserFilterForm } from '../user/userFilterForm';
+import LanguageSelection from './languageSelection';
 
 export function Header() {
+  const { t } = useTranslation();
   const router = useRouter();
-  const { t, i18n } = useTranslation();
+
   const loggedUser = getLoggedUser();
-
-  const changeLanguage = (lng: string) => {
-    i18n.changeLanguage(lng);
-  };
-
-  const currentLanguage = useMemo(() => {
-    const currentLanguage = languages.find(
-      language => language.code === i18n.language
-    );
-    return currentLanguage;
-  }, [i18n.language]);
 
   const handleSignOut = () => {
     localStorage.removeItem('loggedUser');
@@ -85,8 +52,7 @@ export function Header() {
       >
         <Box flex="33%">
           <Link href="/">
-            {/* eslint-disable-next-line @next/next/no-img-element */}
-            <Image src="/logo.svg" h={'25px'} alt="logo" />
+            <Image src="/logo.svg" h={'25px'} alt="Kolab Connect" />
           </Link>
         </Box>
         <Box display={{ base: 'none', md: 'block' }} flex="100%" maxW="680px">
@@ -98,31 +64,11 @@ export function Header() {
               <MdSearch />
             </Link>
           </Text>
+          <LanguageSelection />
           <Menu>
             <MenuButton
               as={IconButton}
-              aria-label="Options"
-              variant="text"
-              border="none"
-              fontSize="2xl"
-            >
-              {currentLanguage?.flag}
-            </MenuButton>
-            <MenuList zIndex={30}>
-              {languages.map(language => (
-                <MenuItem
-                  key={language.code}
-                  onClick={() => changeLanguage(language.code)}
-                >
-                  {language.flag} {language.name}
-                </MenuItem>
-              ))}
-            </MenuList>
-          </Menu>
-          <Menu>
-            <MenuButton
-              as={IconButton}
-              aria-label="Options"
+              aria-label={t('options')}
               variant="text"
               border="none"
               fontSize="2xl"
@@ -132,11 +78,11 @@ export function Header() {
             <MenuList zIndex={30}>
               <Link href={`/users/${loggedUser.id}`}>
                 <MenuItem>
-                  <Text>Profile</Text>
+                  <Text>{t('profile')}</Text>
                 </MenuItem>
               </Link>
               <MenuItem onClick={handleSignOut}>
-                <Text>Sign out</Text>
+                <Text>{t('sign_out')}</Text>
               </MenuItem>
             </MenuList>
           </Menu>

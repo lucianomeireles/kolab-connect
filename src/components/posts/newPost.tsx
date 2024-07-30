@@ -2,7 +2,6 @@
 
 import { getLoggedUser, saveLocalPost } from '@/services';
 import {
-  Button,
   Flex,
   IconButton,
   Input,
@@ -11,10 +10,12 @@ import {
 } from '@chakra-ui/react';
 import { useQueryClient } from '@tanstack/react-query';
 import { useState } from 'react';
-import { MdPhotoLibrary, MdPostAdd } from 'react-icons/md';
+import { useTranslation } from 'react-i18next';
+import { MdPostAdd } from 'react-icons/md';
 import { UserAvatar } from '../user/userAvatar';
 
 export function NewPost() {
+  const { t } = useTranslation();
   const queryClient = useQueryClient();
   const [userComment, setUserComment] = useState<string>('');
   const loggedUser = getLoggedUser();
@@ -56,11 +57,11 @@ export function NewPost() {
         gap={2}
       >
         {loggedUser && (
-          <UserAvatar name={loggedUser.name} username={loggedUser.username} />
+          <UserAvatar name={loggedUser.name} userId={loggedUser.id} />
         )}
         <InputGroup>
           <Input
-            placeholder="What's up"
+            placeholder={t('whats_up')}
             border={0}
             px={1}
             flexGrow={1}
@@ -72,7 +73,7 @@ export function NewPost() {
           <InputRightElement>
             <IconButton
               variant="text"
-              aria-label="Search"
+              aria-label={t('add_post')}
               size="lg"
               icon={<MdPostAdd />}
               onClick={handleSavePost}
