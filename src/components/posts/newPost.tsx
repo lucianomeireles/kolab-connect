@@ -1,10 +1,17 @@
 'use client';
 
 import { getLoggedUser, saveLocalPost } from '@/services';
-import { Button, Flex, Input } from '@chakra-ui/react';
+import {
+  Button,
+  Flex,
+  IconButton,
+  Input,
+  InputGroup,
+  InputRightElement
+} from '@chakra-ui/react';
 import { useQueryClient } from '@tanstack/react-query';
 import { useState } from 'react';
-import { MdPhotoLibrary } from 'react-icons/md';
+import { MdPhotoLibrary, MdPostAdd } from 'react-icons/md';
 import { UserAvatar } from '../user/userAvatar';
 
 export function NewPost() {
@@ -23,6 +30,9 @@ export function NewPost() {
       queryKey: ['posts']
     });
     setUserComment('');
+    setTimeout(() => {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }, 200);
   };
 
   return (
@@ -48,22 +58,27 @@ export function NewPost() {
         {loggedUser && (
           <UserAvatar name={loggedUser.name} username={loggedUser.username} />
         )}
-        <Input
-          placeholder="What's up"
-          border={0}
-          px={1}
-          flexGrow={1}
-          size="sm"
-          onChange={e => setUserComment(e.target.value)}
-          onKeyDown={e => e.key === 'Enter' && handleSavePost()}
-          value={userComment}
-          _focusVisible={{ boxShadow: 'none' }}
-        />
-      </Flex>
-      <Flex>
-        <Button variant="text" onClick={handleSavePost}>
-          <MdPhotoLibrary />
-        </Button>
+        <InputGroup>
+          <Input
+            placeholder="What's up"
+            border={0}
+            px={1}
+            flexGrow={1}
+            onChange={e => setUserComment(e.target.value)}
+            onKeyDown={e => e.key === 'Enter' && handleSavePost()}
+            value={userComment}
+            _focusVisible={{ boxShadow: 'none' }}
+          />
+          <InputRightElement>
+            <IconButton
+              variant="text"
+              aria-label="Search"
+              size="lg"
+              icon={<MdPostAdd />}
+              onClick={handleSavePost}
+            />
+          </InputRightElement>
+        </InputGroup>
       </Flex>
     </Flex>
   );

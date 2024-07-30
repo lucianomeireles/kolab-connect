@@ -1,12 +1,16 @@
 'use client';
 
-import { PostCardContext } from '@/context';
-import { User } from '@/models';
 import { getLoggedUser, saveLocalPostComment } from '@/services';
-import { Button, Flex, Input } from '@chakra-ui/react';
+import {
+  Flex,
+  IconButton,
+  Input,
+  InputGroup,
+  InputRightElement
+} from '@chakra-ui/react';
 import { useQueryClient } from '@tanstack/react-query';
-import { useContext, useState } from 'react';
-import { MdAddComment } from 'react-icons/md';
+import { useState } from 'react';
+import { MdAddComment, MdInsertComment } from 'react-icons/md';
 
 type PostCardCommentFormProps = {
   postId: number;
@@ -46,18 +50,25 @@ export function PostCardCommentForm({
 
   return (
     <Flex direction="row" w="full">
-      <Input
-        borderRadius="md"
-        placeholder="Add a comment..."
-        size="sm"
-        value={userComment}
-        onChange={e => setUserComment(e.target.value)}
-        style={{ flexGrow: 1 }}
-        onKeyDown={handleOnKeyDown}
-      />
-      <Button fontSize="xs" variant="link" onClick={saveComment}>
-        <MdAddComment />
-      </Button>
+      <InputGroup>
+        <Input
+          borderRadius="md"
+          placeholder="Add a comment..."
+          size="md"
+          value={userComment}
+          onChange={e => setUserComment(e.target.value)}
+          onKeyDown={handleOnKeyDown}
+        />
+        <InputRightElement>
+          <IconButton
+            onClick={saveComment}
+            variant="text"
+            aria-label="Save"
+            size="lg"
+            icon={!commentId ? <MdAddComment /> : <MdInsertComment />}
+          />
+        </InputRightElement>
+      </InputGroup>
     </Flex>
   );
 }

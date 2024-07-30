@@ -1,4 +1,4 @@
-import type { Post, PostComment, User } from '@/models';
+import type { Post, PostComment } from '@/models';
 import { useQuery } from '@tanstack/react-query';
 import { apiClient } from '../apiClient';
 import { getLoggedUser } from '../users/user.service';

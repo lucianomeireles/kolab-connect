@@ -21,7 +21,7 @@ import { useTranslation } from 'react-i18next';
 export function Register() {
   const router = useRouter();
   const { t } = useTranslation();
-  const { email } = useContext(LoginContext);
+  const { email, setStep } = useContext(LoginContext);
   const initialValues: RegisterForm = {
     email: email || '',
     name: '',
@@ -112,6 +112,15 @@ export function Register() {
           )}
         </Formik>
       </Box>
+      <Button
+        variant="text"
+        w="full"
+        onClick={_ => {
+          setStep('signin');
+        }}
+      >
+        {t('back')}
+      </Button>
     </Flex>
   );
 }

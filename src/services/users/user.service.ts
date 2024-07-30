@@ -19,8 +19,8 @@ const getUsers = async (): Promise<User[]> => {
   }));
 
   const loggedUser = getLoggedUser();
-  if (loggedUser) return [loggedUser, ...apiUsers];
-  else return apiUsers;
+  const result = loggedUser ? [loggedUser, ...apiUsers] : apiUsers;
+  return result.sort((a, b) => a.name.localeCompare(b.name));
 };
 
 export const useGetUsers = () => {
@@ -46,21 +46,21 @@ const registerUser = async (params: RegisterForm): Promise<User> => {
     username: params.username,
     email: params.email,
     address: {
-      street: 'Skiles Walks',
-      suite: 'Suite 351',
-      city: 'Roscoeview',
-      zipcode: '33263',
+      street: 'R. Tito, 479',
+      suite: '1º Andar - Lapa',
+      city: 'São Paulo',
+      zipcode: '05051-000',
       geo: {
         lat: '-31.8129',
         lng: '62.5342'
       }
     },
-    phone: '(254)954-1289',
-    website: 'demarco.info',
+    phone: '+55 11 3022-5545',
+    website: 'https://kolab.com.br/',
     company: {
-      name: 'Keebler LLC',
-      catchPhrase: 'User-centric fault-tolerant solution',
-      bs: 'revolutionize end-to-end systems'
+      name: 'Kolab',
+      catchPhrase: `Recruitment & Selection, onboarding and training more interactive and connected to your company's culture.`,
+      bs: 'hr'
     }
   };
 

@@ -1,6 +1,8 @@
 import { User } from '@/models';
 import { useGetUsers } from '@/services';
+import { Flex } from '@chakra-ui/react';
 import React, { createContext } from 'react';
+import { Spinner } from '@chakra-ui/react';
 
 type AppContext = {
   users: User[];
@@ -23,7 +25,11 @@ export function AppProvider({ children }: AppProviderProps) {
         users: users || []
       }}
     >
-      {isLoading ? 'Loading...' : null}
+      {isLoading ? (
+        <Flex justifyContent="center" alignItems="center" minH="100vh">
+          <Spinner colorScheme="kbPrimary" />
+        </Flex>
+      ) : null}
       {!isLoading && children}
     </AppContext.Provider>
   );

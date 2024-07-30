@@ -26,6 +26,13 @@ export function UserSearchResultList({ filter }: UserSearchResultListProps) {
     : [];
 
   if (!filter) return <></>;
+  if (!!filter && filteredUsers.length === 0) {
+    return (
+      <Flex justifyContent="center" alignItems="center" flexGrow={1}>
+        <Text>No users found</Text>
+      </Flex>
+    );
+  }
 
   return (
     <Box maxW="680px" p={4} marginX="auto" w="full">
