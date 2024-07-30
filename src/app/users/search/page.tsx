@@ -5,14 +5,15 @@ import { UserFilterForm } from '@/components/user/userFilterForm';
 import { AppProvider } from '@/context';
 import { Box, Flex, VStack } from '@chakra-ui/react';
 import { useSearchParams } from 'next/navigation';
+import { Suspense } from 'react';
 
-export default function UserSearchResult() {
+function UserSearchContent() {
   const searchParams = useSearchParams();
   const search = searchParams.get('name');
 
   return (
     <AppProvider>
-      <Flex w="full" minH="100vh" gap={0} flexDirection="column">
+      <Flex w="full" minH="100dvh" gap={0} flexDirection="column">
         <Header />
         <VStack
           w="full"
@@ -29,5 +30,13 @@ export default function UserSearchResult() {
         </VStack>
       </Flex>
     </AppProvider>
+  );
+}
+
+export default function UserSearchResult() {
+  return (
+    <Suspense>
+      <UserSearchContent />
+    </Suspense>
   );
 }

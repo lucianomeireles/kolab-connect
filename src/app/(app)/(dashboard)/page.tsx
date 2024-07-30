@@ -7,7 +7,7 @@ import { Box, VStack } from '@chakra-ui/react';
 export default function Home() {
   return (
     <AppProvider>
-      <VStack w="full" minH="100vh">
+      <VStack w="full" minH="100dvh">
         <Header />
         <Feed />
         <Box

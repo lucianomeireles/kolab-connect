@@ -14,7 +14,7 @@ export default function UserDetails({
 
   return (
     <AppProvider>
-      <VStack w="full" minH="100vh" gap={0}>
+      <VStack w="full" minH="100dvh" gap={0}>
         <Header />
         <UserDetailsCard userId={userId} />
         <Feed userId={userId} />

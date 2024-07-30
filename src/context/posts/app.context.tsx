@@ -26,7 +26,7 @@ export function AppProvider({ children }: AppProviderProps) {
       }}
     >
       {isLoading ? (
-        <Flex justifyContent="center" alignItems="center" minH="100vh">
+        <Flex justifyContent="center" alignItems="center" minH="100dvh">
           <Spinner colorScheme="kbPrimary" />
         </Flex>
       ) : null}

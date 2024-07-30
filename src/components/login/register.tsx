@@ -40,7 +40,7 @@ export function Register() {
 
   return (
     <Flex
-      minH="100vh"
+      minH="100dvh"
       minW="100vw"
       justify="center"
       align="center"

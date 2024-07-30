@@ -36,7 +36,7 @@ export function Signin() {
 
   return (
     <Flex
-      minH="100vh"
+      minH="100dvh"
       minW="100vw"
       justify="center"
       align="center"
@@ -71,7 +71,11 @@ export function Signin() {
                       isInvalid={form.errors.email && form.touched.email}
                     >
                       <FormLabel htmlFor="email">{t('email')}</FormLabel>
-                      <Input {...field} placeholder={t('enter_your_email')} />
+                      <Input
+                        {...field}
+                        type="email"
+                        placeholder={t('enter_your_email')}
+                      />
                       <FormErrorMessage>{form.errors.email}</FormErrorMessage>
                     </FormControl>
                   )}
