@@ -12,7 +12,7 @@ import {
   Input
 } from '@chakra-ui/react';
 import { Field, Form, Formik } from 'formik';
-import { useRouter } from 'next/router';
+import { useRouter } from 'next/navigation';
 import { useContext } from 'react';
 import { useTranslation } from 'react-i18next';
 

@@ -1,0 +1,13 @@
+2024-07-30T16:59:47.598Z   +140ms [debug] Config loaded {"version":"2.43.4","cdkVersion":"2.142.1","constructsVersion":"10.3.0","config":{"name":"kolab-connect","region":"sa-east-1","stage":"dev","ssmPrefix":"/sst/kolab-connect/dev/"},"metafile":{"inputs":{"sst.config.ts":{"bytes":235,"imports":[{"path":"sst","kind":"import-statement","external":true},{"path":"sst/constructs","kind":"import-statement","external":true}],"format":"esm"}},"outputs":{".sst.config.1722358787477.mjs":{"imports":[],"exports":["default"],"entryPoint":"sst.config.ts","inputs":{"sst.config.ts":{"bytesInOutput":148}},"bytes":330}}},"paths":{"config":"/Users/lm/Workspace/kolab-connect/sst.config.ts","root":"/Users/lm/Workspace/kolab-connect","out":"/Users/lm/Workspace/kolab-connect/.sst","artifacts":"/Users/lm/Workspace/kolab-connect/.sst/artifacts"}}
+2024-07-30T16:59:48.525Z   +927ms [debug] Using AWS profile 
+2024-07-30T16:59:48.529Z     +4ms [debug] Created AWS client STSClient
+2024-07-30T16:59:48.531Z     +2ms [debug] Fetching app metadata
+2024-07-30T16:59:48.532Z     +1ms [debug] Initializing bootstrap context
+2024-07-30T16:59:48.533Z     +1ms [debug] Created AWS client CloudFormationClient
+2024-07-30T16:59:48.668Z   +135ms [debug] Using identity Account: 833088920209 User: AIDA4D57YDKI6SXE3AZR3
+2024-07-30T16:59:48.803Z   +135ms [debug] Loaded bootstrap status
+2024-07-30T16:59:49.085Z   +282ms [debug] Deploying stack SSTBootstrap
+2024-07-30T16:59:49.085Z     +0ms [debug] Loading v2 AWS SDK
+2024-07-30T16:59:49.315Z   +230ms [debug] Publishing event {"type":"stack.status","properties":{"stackID":"SSTBootstrap","status":"PUBLISH_ASSETS_IN_PROGRESS"},"sourceID":"78c86b78fe9a3023b52f90ecb90b90be"}
+2024-07-30T16:59:50.289Z   +974ms [debug] Failed to deploy stack SSTBootstrap {"message":"Stack:arn:aws:cloudformation:sa-east-1:833088920209:stack/SSTBootstrap/e75fd0e0-274f-11ee-ac68-02e6d0266c20 is in DELETE_IN_PROGRESS state and can not be updated.","code":"ValidationError","time":"2024-07-30T16:59:50.288Z","requestId":"ab701343-11ff-4ac4-b27c-cf6ce538188d","statusCode":400,"retryable":false,"retryDelay":429.29997516597984}
+2024-07-30T16:59:50.290Z     +1ms [debug] Publishing event {"type":"stack.status","properties":{"stackID":"SSTBootstrap","status":"UPDATE_FAILED"},"sourceID":"78c86b78fe9a3023b52f90ecb90b90be"}

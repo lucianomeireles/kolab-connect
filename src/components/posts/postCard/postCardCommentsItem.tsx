@@ -17,7 +17,7 @@ export function PostCardCommentsItem({ comment }: PostCardCommentsItemProps) {
   const queryClient = useQueryClient();
   const [isEditing, setIsEditing] = useState<boolean>(false);
   const loggedUser = getLoggedUser();
-  const showActions = !isEditing && loggedUser.id === comment.user?.id;
+  const showActions = !isEditing && loggedUser?.id === comment.user?.id;
 
   const handleDelete = () => {
     removePostComment(comment.id);

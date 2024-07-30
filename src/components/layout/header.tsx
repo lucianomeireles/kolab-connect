@@ -73,10 +73,10 @@ export function Header() {
               border="none"
               fontSize="2xl"
             >
-              <Avatar name={loggedUser.name} size="sm" />
+              <Avatar name={loggedUser?.name} size="sm" />
             </MenuButton>
             <MenuList zIndex={30}>
-              <Link href={`/users/${loggedUser.id}`}>
+              <Link href={`/users/${loggedUser?.id}`}>
                 <MenuItem>
                   <Text>{t('profile')}</Text>
                 </MenuItem>

@@ -1,4 +1,10 @@
-import { Menu, MenuButton, IconButton, MenuList, MenuItem } from '@chakra-ui/react';
+import {
+  Menu,
+  MenuButton,
+  IconButton,
+  MenuList,
+  MenuItem
+} from '@chakra-ui/react';
 import React, { useMemo } from 'react';
 import { useTranslation } from 'react-i18next';
 

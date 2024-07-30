@@ -29,7 +29,7 @@ export const saveLocalPost = (params: Partial<Post>): void => {
 
   const postParams: Post = {
     id: params.id || id,
-    userId: loggedUser.id,
+    userId: loggedUser?.id || 1,
     title: `Post ${params.id || id}`,
     body: params.body || '',
     user: loggedUser,

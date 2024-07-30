@@ -28,7 +28,7 @@ export default function UserDetailsCard({ userId }: UserDetailsCardProps) {
   const { users } = useContext(AppContext);
   const loggedUser = getLoggedUser();
   const user = [...users, loggedUser].find(
-    user => user.id.toString() === userId
+    user => user?.id.toString() === userId
   );
 
   const editable = userId === loggedUser?.id.toString();
@@ -106,8 +106,8 @@ export default function UserDetailsCard({ userId }: UserDetailsCardProps) {
                 color="white"
                 isDisabled={!editable}
                 onSubmit={(value: string) => {
-                  if (value !== loggedUser.name)
-                    handleUpdateUser({ ...loggedUser, name: value });
+                  if (value !== loggedUser?.name)
+                    handleUpdateUser({ ...loggedUser!, name: value });
                 }}
                 w="full"
                 flexGrow={1}
@@ -125,8 +125,8 @@ export default function UserDetailsCard({ userId }: UserDetailsCardProps) {
                 lineHeight="10px"
                 isDisabled={!editable}
                 onSubmit={(value: string) => {
-                  if (value !== loggedUser.email)
-                    handleUpdateUser({ ...loggedUser, email: value });
+                  if (value !== loggedUser?.email)
+                    handleUpdateUser({ ...loggedUser!, email: value });
                 }}
                 w="full"
                 flexGrow={1}
@@ -145,8 +145,8 @@ export default function UserDetailsCard({ userId }: UserDetailsCardProps) {
                   color="gray.800"
                   isDisabled={!editable}
                   onSubmit={(value: string) => {
-                    if (value !== loggedUser.username)
-                      handleUpdateUser({ ...loggedUser, username: value });
+                    if (value !== loggedUser?.username)
+                      handleUpdateUser({ ...loggedUser!, username: value });
                   }}
                   w="full"
                 >

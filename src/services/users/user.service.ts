@@ -3,12 +3,13 @@ import { useMutation, useQuery } from '@tanstack/react-query';
 import { apiClient } from '../apiClient';
 
 // Get the logged user from localStorage
-export const getLoggedUser = (): User => {
+export const getLoggedUser = (): User | undefined => {
   if (typeof window !== 'undefined') {
     const loggedUser = localStorage.getItem('loggedUser');
     if (loggedUser) {
       return JSON.parse(loggedUser);
     }
+    window.location.href = '/login';
   }
   return {} as User;
 };

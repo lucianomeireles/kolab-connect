@@ -19,7 +19,7 @@ export default function PostCardComments({ postId }: PostCardCommentsProps) {
 
   const commentsMapped = useMemo(() => {
     if (!users) return [];
-    const otherUsers = users.filter(user => user.id !== loggedUser.id);
+    const otherUsers = users.filter(user => user.id !== loggedUser?.id);
     const apiComments = postComments?.map(comment => {
       const user = !comment.user
         ? otherUsers[Math.floor(Math.random() * otherUsers.length)]

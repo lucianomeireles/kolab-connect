@@ -26,7 +26,7 @@ i18n.use(initReactI18next).init({
         see_comments: 'See comments',
         sign_out: 'Sign out',
         username: 'Username',
-        whats_up: 'Whats up?',
+        whats_up: 'Whats up?'
       }
     },
     es: {

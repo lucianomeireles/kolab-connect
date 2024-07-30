@@ -105,12 +105,12 @@ README.md
 ```
 
 ## Technologies Used
+
 - [Next.js](https://nextjs.org/)
 - [Chakra UI](https://chakra-ui.com/)
 - [i18next](https://www.i18next.com/)
 - [React Query](https://react-query.tanstack.com/)
 - [TypeScript](https://www.typescriptlang.org/)
-
 
 ## Contributing
 
